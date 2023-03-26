@@ -64,5 +64,24 @@ for shape in sf.shapeRecords():
 plt.show()
 
 
+# %%
+from mpl_toolkits.basemap import Basemap
+import shapefile
+import matplotlib.pyplot as plt
+
+# Read the shapefile
+sf = shapefile.Reader("guangdong.shp")
+
+# Create a new map
+m = Basemap(llcrnrlon=109, llcrnrlat=20, urcrnrlon=118, urcrnrlat=26, projection='lcc', lat_1=33, lat_2=45, lon_0=100)
+
+# Plot the map
+for shape in sf.shapeRecords():
+    x, y = zip(*shape.shape.points)
+    x, y = m(x, y)
+    m.plot(x, y, 'k-', linewidth=0.5)
+
+# Show the plot
+plt.show()
 
 
